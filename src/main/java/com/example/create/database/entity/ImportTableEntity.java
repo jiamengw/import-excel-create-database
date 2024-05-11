@@ -1,4 +1,4 @@
-package com.example.ceate.database.entity;
+package com.example.create.database.entity;
 
 import java.util.List;
 

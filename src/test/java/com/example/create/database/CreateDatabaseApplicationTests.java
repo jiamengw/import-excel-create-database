@@ -1,12 +1,13 @@
-package com.example.ceate.database;
+package com.example.create.database;
 
-import com.example.ceate.database.entity.ImportTableEntity;
-import com.example.ceate.database.export.CreateTable;
-import com.example.ceate.database.export.ImportExcel;
+import com.example.create.database.entity.ImportTableEntity;
+import com.example.create.database.export.CreateTable;
+import com.example.create.database.export.ImportExcel;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.io.ClassPathResource;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -24,7 +25,7 @@ class CreateDatabaseApplicationTests {
     @Test
     void createTable() {
         try {
-            File file = new File("D:\\import\\test.xlsx");
+            File file = new ClassPathResource("excel/template.xlsx").getFile();
             FileInputStream fileInputStream = new FileInputStream(file);
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             byte[] buffer = new byte[1024];
@@ -37,7 +38,7 @@ class CreateDatabaseApplicationTests {
             List<ImportTableEntity> tableEntityList = importExcel.importExcel(outputStream);
             log.info(tableEntityList.toString());
             if (!tableEntityList.isEmpty()){
-                createTable.create(tableEntityList);
+//                createTable.create(tableEntityList);
             }
         }catch (Exception e){
             e.printStackTrace();

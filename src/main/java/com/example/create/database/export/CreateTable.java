@@ -1,8 +1,8 @@
-package com.example.ceate.database.export;
+package com.example.create.database.export;
 
 
-import com.example.ceate.database.entity.ImportColumnEntity;
-import com.example.ceate.database.entity.ImportTableEntity;
+import com.example.create.database.entity.ImportColumnEntity;
+import com.example.create.database.entity.ImportTableEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.stereotype.Component;
@@ -42,7 +42,10 @@ public class CreateTable {
                     if ("decimal".equalsIgnoreCase(columnEntity.getType())) {
                         sql.append("(").append(columnEntity.getLength()).append(",").append(columnEntity.getMinLen()).append(") ");
                     } else {
-                        sql.append("(").append(columnEntity.getLength()).append(") ");
+                        if (columnEntity.getLength() != 0) {
+                            sql.append("(").append(columnEntity.getLength()).append(")");
+                        }
+                        sql.append(" ");
                     }
                     if ("varchar".equalsIgnoreCase(columnEntity.getType())) {
                         sql.append("CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci ");
