@@ -33,7 +33,7 @@ public class ImportExcel {
         for (int i = 0; i < sheets; i++) {
             Sheet sheet = workbook.getSheetAt(i);
             Row tempRow = sheet.getRow(0);
-            String cellValue = PoiCellUtil.getCellValue(tempRow.getCell(0));
+            String cellValue = PoiCellUtil.getCellValue(tempRow.getCell(0)).replaceAll("\\uFEFF", "");
             log.info("cellValue:{}", cellValue);
             if (cellValue.isEmpty()){
                 continue;
