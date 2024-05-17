@@ -49,6 +49,7 @@ public class ImportExcel {
             params.setSheetNum(1);
             List<ImportColumnEntity> list = ExcelImportUtil.importExcel(new ByteArrayInputStream(outputStream.toByteArray()), ImportColumnEntity.class, params);
             list.forEach(e->{
+                e.setName(e.getName().replaceAll("\\uFEFF", ""));
                 if (StringUtils.hasLength(e.getLengthStr()) ){
                     if (e.getLengthStr().contains(",")){
                         String[] split1 = e.getLengthStr().split(",");
